@@ -42,10 +42,6 @@ Clean up the project.
 
 Running on one computetile
 
-## FDTD_2D_trace
-
-Profiling when running on one computetile
-
 ## FDTD_2D_16CTs
 
 Running on 16 computetiles
