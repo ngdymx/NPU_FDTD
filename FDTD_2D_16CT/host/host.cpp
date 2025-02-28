@@ -30,15 +30,15 @@ int main(int argc, const char *argv[]) {
     int n_warmup_iterations = vm["warmup"].as<int>();
     int trace_size = vm["trace_sz"].as<int>();
 
-    constexpr int COLS = 256;
-    constexpr int ROWS = 256;
+    constexpr int COLS = 512;
+    constexpr int ROWS = 512;
     constexpr int BLOCK_SIZE = 16;
     constexpr int CHANNELIN0_SIZE = COLS * ROWS * 3;
     constexpr int CHANNELIN1_SIZE = COLS * ROWS * 4;
     constexpr int CHANNELOUT0_SIZE = COLS * ROWS * 3;
     constexpr int CHANNELOUT1_SIZE = COLS * ROWS * 4;
 
-    constexpr int T = 64 * 64 / 64 / 4;
+    constexpr int T = 64 * 64 / 64;
 
     constexpr int SRC_POINT_ROW = 120;
     constexpr int SRC_POINT_COL = 120;
@@ -192,6 +192,7 @@ int main(int argc, const char *argv[]) {
         unsigned int opcode = 3;
         auto run = kernel(opcode, bo_instr, instr_v.size(), bo_inout, bo_meta); 
         run.wait();
+        std::cout << "Finishing Kernel.\n"; 
     }
     std::cout << "Finishing Kernel.\n"; 
     auto stop = std::chrono::high_resolution_clock::now();

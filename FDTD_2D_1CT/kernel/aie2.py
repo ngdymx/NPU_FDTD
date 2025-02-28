@@ -186,7 +186,7 @@ def FDTD_2D():
                     sizes=[64, ROWS, 4*1, COLS],
                     strides=[0, 4*COLS, COLS, 1],
                 )
-            dma_wait(act_out, meta_mem_out)
+                dma_wait(act_out, meta_mem_out)
 
 # Declares that subsequent code is in mlir-aie context
 with mlir_mod_ctx() as ctx:

@@ -1,0 +1,1287 @@
+3c3
+<     func.func private @fdtd_2d(memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32)
+---
+>     func.func private @fdtd_2d(memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32)
+14,16d13
+<     %tile_1_5 = aie.tile(1, 5)
+<     %tile_1_4 = aie.tile(1, 4)
+<     %tile_1_3 = aie.tile(1, 3)
+17a15,17
+>     %tile_1_3 = aie.tile(1, 3)
+>     %tile_1_4 = aie.tile(1, 4)
+>     %tile_1_5 = aie.tile(1, 5)
+22,24d21
+<     %tile_3_5 = aie.tile(3, 5)
+<     %tile_3_4 = aie.tile(3, 4)
+<     %tile_3_3 = aie.tile(3, 3)
+26,81c23,25
+<     
+<     aie.objectfifo @act_In(%tile_0_0, {%tile_0_2}, 2 : i32) : !aie.objectfifo<memref<1536xf32>> 
+<     aie.objectfifo @act_In_0_2_3(%tile_0_2, {%tile_0_3}, 2 : i32) : !aie.objectfifo<memref<1536xf32>> 
+<     aie.objectfifo @act_In_0_3_4(%tile_0_3, {%tile_0_4}, 2 : i32) : !aie.objectfifo<memref<1536xf32>> 
+<     aie.objectfifo @act_In_0_4_5(%tile_0_4, {%tile_0_5}, 2 : i32) : !aie.objectfifo<memref<1536xf32>> 
+<     aie.objectfifo @act_In_1_0_3(%tile_0_5, {%tile_1_5}, 2 : i32) : !aie.objectfifo<memref<1536xf32>> 
+<     aie.objectfifo @act_In_1_2_3(%tile_1_5, {%tile_1_4}, 2 : i32) : !aie.objectfifo<memref<1536xf32>> 
+<     aie.objectfifo @act_In_1_3_4(%tile_1_4, {%tile_1_3}, 2 : i32) : !aie.objectfifo<memref<1536xf32>> 
+<     aie.objectfifo @act_In_1_4_5(%tile_1_3, {%tile_1_2}, 2 : i32) : !aie.objectfifo<memref<1536xf32>> 
+<     aie.objectfifo @act_In_2_0_3(%tile_1_2, {%tile_2_2}, 2 : i32) : !aie.objectfifo<memref<1536xf32>> 
+<     aie.objectfifo @act_In_2_2_3(%tile_2_2, {%tile_2_3}, 2 : i32) : !aie.objectfifo<memref<1536xf32>> 
+<     aie.objectfifo @act_In_2_3_4(%tile_2_3, {%tile_2_4}, 2 : i32) : !aie.objectfifo<memref<1536xf32>> 
+<     aie.objectfifo @act_In_2_4_5(%tile_2_4, {%tile_2_5}, 2 : i32) : !aie.objectfifo<memref<1536xf32>> 
+<     aie.objectfifo @act_In_3_0_3(%tile_2_5, {%tile_3_5}, 2 : i32) : !aie.objectfifo<memref<1536xf32>> 
+<     aie.objectfifo @act_In_3_2_3(%tile_3_5, {%tile_3_4}, 2 : i32) : !aie.objectfifo<memref<1536xf32>> 
+<     aie.objectfifo @act_In_3_3_4(%tile_3_4, {%tile_3_3}, 2 : i32) : !aie.objectfifo<memref<1536xf32>> 
+<     aie.objectfifo @act_In_3_4_5(%tile_3_3, {%tile_3_2}, 2 : i32) : !aie.objectfifo<memref<1536xf32>> 
+<     aie.objectfifo @act_out(%tile_3_2, {%tile_3_0}, 2 : i32) : !aie.objectfifo<memref<1536xf32>> 
+<     aie.objectfifo @meta_mem_In(%tile_0_0, {%tile_0_1}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo @meta_In(%tile_0_1, {%tile_0_2}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo @meta_In_0_2_3(%tile_0_2, {%tile_0_3}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo @meta_In_0_3_4(%tile_0_3, {%tile_0_4}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo @meta_In_0_4_5(%tile_0_4, {%tile_0_5}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo @meta_In_1_0_3(%tile_0_5, {%tile_1_5}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo @meta_In_1_2_3(%tile_1_5, {%tile_1_4}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo @meta_In_1_3_4(%tile_1_4, {%tile_1_3}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo @meta_In_1_4_5(%tile_1_3, {%tile_1_2}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo @meta_In_2_0_3(%tile_1_2, {%tile_2_2}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo @meta_In_2_2_3(%tile_2_2, {%tile_2_3}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo @meta_In_2_3_4(%tile_2_3, {%tile_2_4}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo @meta_In_2_4_5(%tile_2_4, {%tile_2_5}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo @meta_In_3_0_3(%tile_2_5, {%tile_3_5}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo @meta_In_3_2_3(%tile_3_5, {%tile_3_4}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo @meta_In_3_3_4(%tile_3_4, {%tile_3_3}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo @meta_In_3_4_5(%tile_3_3, {%tile_3_2}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo @meta_out(%tile_3_2, {%tile_3_1}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo @meta_mem_out(%tile_3_1, {%tile_3_0}, 2 : i32) : !aie.objectfifo<memref<2048xui8>> 
+<     aie.objectfifo.link [@meta_mem_In] -> [@meta_In]([] [])
+<     aie.objectfifo.link [@meta_out] -> [@meta_mem_out]([] [])
+< 
+<     %UPDATEDHY_00 = aie.buffer(%tile_0_2) {sym_name = "UPDATEDHY_00"} : memref<512xf32> 
+<     %UPDATEDHY_01 = aie.buffer(%tile_0_3) {sym_name = "UPDATEDHY_01"} : memref<512xf32> 
+<     %UPDATEDHY_02 = aie.buffer(%tile_0_4) {sym_name = "UPDATEDHY_02"} : memref<512xf32> 
+<     %UPDATEDHY_03 = aie.buffer(%tile_0_5) {sym_name = "UPDATEDHY_03"} : memref<512xf32> 
+<     %UPDATEDHY_10 = aie.buffer(%tile_1_5) {sym_name = "UPDATEDHY_10"} : memref<512xf32> 
+<     %UPDATEDHY_11 = aie.buffer(%tile_1_4) {sym_name = "UPDATEDHY_11"} : memref<512xf32> 
+<     %UPDATEDHY_12 = aie.buffer(%tile_1_3) {sym_name = "UPDATEDHY_12"} : memref<512xf32> 
+<     %UPDATEDHY_13 = aie.buffer(%tile_1_2) {sym_name = "UPDATEDHY_13"} : memref<512xf32> 
+<     %UPDATEDHY_20 = aie.buffer(%tile_2_2) {sym_name = "UPDATEDHY_20"} : memref<512xf32> 
+<     %UPDATEDHY_21 = aie.buffer(%tile_2_3) {sym_name = "UPDATEDHY_21"} : memref<512xf32> 
+<     %UPDATEDHY_22 = aie.buffer(%tile_2_4) {sym_name = "UPDATEDHY_22"} : memref<512xf32> 
+<     %UPDATEDHY_23 = aie.buffer(%tile_2_5) {sym_name = "UPDATEDHY_23"} : memref<512xf32> 
+<     %UPDATEDHY_30 = aie.buffer(%tile_3_5) {sym_name = "UPDATEDHY_30"} : memref<512xf32> 
+<     %UPDATEDHY_31 = aie.buffer(%tile_3_4) {sym_name = "UPDATEDHY_31"} : memref<512xf32> 
+<     %UPDATEDHY_32 = aie.buffer(%tile_3_3) {sym_name = "UPDATEDHY_32"} : memref<512xf32> 
+<     %UPDATEDHY_33 = aie.buffer(%tile_3_2) {sym_name = "UPDATEDHY_33"} : memref<512xf32> 
+---
+>     %tile_3_3 = aie.tile(3, 3)
+>     %tile_3_4 = aie.tile(3, 4)
+>     %tile_3_5 = aie.tile(3, 5)
+83,98c27,64
+<     %Buffer_00 = aie.buffer(%tile_0_2) {sym_name = "Buffer_00"} : memref<1536xf32> 
+<     %Buffer_01 = aie.buffer(%tile_0_3) {sym_name = "Buffer_01"} : memref<1536xf32> 
+<     %Buffer_02 = aie.buffer(%tile_0_4) {sym_name = "Buffer_02"} : memref<1536xf32> 
+<     %Buffer_03 = aie.buffer(%tile_0_5) {sym_name = "Buffer_03"} : memref<1536xf32> 
+<     %Buffer_10 = aie.buffer(%tile_1_5) {sym_name = "Buffer_10"} : memref<1536xf32> 
+<     %Buffer_11 = aie.buffer(%tile_1_4) {sym_name = "Buffer_11"} : memref<1536xf32> 
+<     %Buffer_12 = aie.buffer(%tile_1_3) {sym_name = "Buffer_12"} : memref<1536xf32> 
+<     %Buffer_13 = aie.buffer(%tile_1_2) {sym_name = "Buffer_13"} : memref<1536xf32> 
+<     %Buffer_20 = aie.buffer(%tile_2_2) {sym_name = "Buffer_20"} : memref<1536xf32> 
+<     %Buffer_21 = aie.buffer(%tile_2_3) {sym_name = "Buffer_21"} : memref<1536xf32> 
+<     %Buffer_22 = aie.buffer(%tile_2_4) {sym_name = "Buffer_22"} : memref<1536xf32> 
+<     %Buffer_23 = aie.buffer(%tile_2_5) {sym_name = "Buffer_23"} : memref<1536xf32> 
+<     %Buffer_30 = aie.buffer(%tile_3_5) {sym_name = "Buffer_30"} : memref<1536xf32> 
+<     %Buffer_31 = aie.buffer(%tile_3_4) {sym_name = "Buffer_31"} : memref<1536xf32> 
+<     %Buffer_32 = aie.buffer(%tile_3_3) {sym_name = "Buffer_32"} : memref<1536xf32> 
+<     %Buffer_33 = aie.buffer(%tile_3_2) {sym_name = "Buffer_33"} : memref<1536xf32> 
+---
+>     aie.objectfifo @act_In(%tile_0_0, {%tile_0_2}, 2 : i32) : !aie.objectfifo<memref<1536xf32>>
+>     aie.objectfifo @meta_mem_In(%tile_0_0, {%tile_0_1}, 2 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo @meta_In(%tile_0_1, {%tile_0_2}, 2 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo.link [@meta_mem_In] -> [@meta_In]()
+>     aie.objectfifo @act_02_03(%tile_0_2, {%tile_0_3}, 4 : i32) : !aie.objectfifo<memref<1536xf32>>
+>     aie.objectfifo @meta_02_03(%tile_0_2, {%tile_0_3}, 4 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo @act_03_04(%tile_0_3, {%tile_0_4}, 4 : i32) : !aie.objectfifo<memref<1536xf32>>
+>     aie.objectfifo @meta_03_04(%tile_0_3, {%tile_0_4}, 4 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo @act_04_05(%tile_0_4, {%tile_0_5}, 4 : i32) : !aie.objectfifo<memref<1536xf32>>
+>     aie.objectfifo @meta_04_05(%tile_0_4, {%tile_0_5}, 4 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo @act_05_15(%tile_0_5, {%tile_1_5}, 4 : i32) : !aie.objectfifo<memref<1536xf32>>
+>     aie.objectfifo @meta_05_15(%tile_0_5, {%tile_1_5}, 4 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo @act_15_14(%tile_1_5, {%tile_1_4}, 4 : i32) : !aie.objectfifo<memref<1536xf32>>
+>     aie.objectfifo @meta_15_14(%tile_1_5, {%tile_1_4}, 4 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo @act_14_13(%tile_1_4, {%tile_1_3}, 4 : i32) : !aie.objectfifo<memref<1536xf32>>
+>     aie.objectfifo @meta_14_13(%tile_1_4, {%tile_1_3}, 4 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo @act_13_12(%tile_1_3, {%tile_1_2}, 4 : i32) : !aie.objectfifo<memref<1536xf32>>
+>     aie.objectfifo @meta_13_12(%tile_1_3, {%tile_1_2}, 4 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo @act_12_22(%tile_1_2, {%tile_2_2}, 4 : i32) : !aie.objectfifo<memref<1536xf32>>
+>     aie.objectfifo @meta_12_22(%tile_1_2, {%tile_2_2}, 4 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo @act_22_23(%tile_2_2, {%tile_2_3}, 4 : i32) : !aie.objectfifo<memref<1536xf32>>
+>     aie.objectfifo @meta_22_23(%tile_2_2, {%tile_2_3}, 4 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo @act_23_24(%tile_2_3, {%tile_2_4}, 4 : i32) : !aie.objectfifo<memref<1536xf32>>
+>     aie.objectfifo @meta_23_24(%tile_2_3, {%tile_2_4}, 4 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo @act_24_25(%tile_2_4, {%tile_2_5}, 4 : i32) : !aie.objectfifo<memref<1536xf32>>
+>     aie.objectfifo @meta_24_25(%tile_2_4, {%tile_2_5}, 4 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo @act_25_35(%tile_2_5, {%tile_3_5}, 4 : i32) : !aie.objectfifo<memref<1536xf32>>
+>     aie.objectfifo @meta_25_35(%tile_2_5, {%tile_3_5}, 4 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo @act_35_34(%tile_3_5, {%tile_3_4}, 4 : i32) : !aie.objectfifo<memref<1536xf32>>
+>     aie.objectfifo @meta_35_34(%tile_3_5, {%tile_3_4}, 4 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo @act_34_33(%tile_3_4, {%tile_3_3}, 4 : i32) : !aie.objectfifo<memref<1536xf32>>
+>     aie.objectfifo @meta_34_33(%tile_3_4, {%tile_3_3}, 4 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo @act_33_32(%tile_3_3, {%tile_3_2}, 4 : i32) : !aie.objectfifo<memref<1536xf32>>
+>     aie.objectfifo @meta_33_32(%tile_3_3, {%tile_3_2}, 4 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo @act_out(%tile_3_2, {%tile_3_0}, 2 : i32) : !aie.objectfifo<memref<1536xf32>>
+>     aie.objectfifo @meta_out(%tile_3_2, {%tile_3_1}, 2 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo @meta_mem_out(%tile_3_1, {%tile_3_0}, 2 : i32) : !aie.objectfifo<memref<1536xui8>>
+>     aie.objectfifo.link [@meta_out] -> [@meta_mem_out]()
+99a66,97
+>     %UPDATEDHY0 = aie.buffer(%tile_0_2) {sym_name = "UPDATEDHY0"} : memref<512xf32> 
+>     %Buffer0 = aie.buffer(%tile_0_2) {sym_name = "Buffer0"} : memref<1536xf32> 
+>     %UPDATEDHY1 = aie.buffer(%tile_0_3) {sym_name = "UPDATEDHY1"} : memref<512xf32> 
+>     %Buffer1 = aie.buffer(%tile_0_3) {sym_name = "Buffer1"} : memref<1536xf32> 
+>     %UPDATEDHY2 = aie.buffer(%tile_0_4) {sym_name = "UPDATEDHY2"} : memref<512xf32> 
+>     %Buffer2 = aie.buffer(%tile_0_4) {sym_name = "Buffer2"} : memref<1536xf32> 
+>     %UPDATEDHY3 = aie.buffer(%tile_0_5) {sym_name = "UPDATEDHY3"} : memref<512xf32> 
+>     %Buffer3 = aie.buffer(%tile_0_5) {sym_name = "Buffer3"} : memref<1536xf32> 
+>     %UPDATEDHY4 = aie.buffer(%tile_1_5) {sym_name = "UPDATEDHY4"} : memref<512xf32> 
+>     %Buffer4 = aie.buffer(%tile_1_5) {sym_name = "Buffer4"} : memref<1536xf32> 
+>     %UPDATEDHY5 = aie.buffer(%tile_1_4) {sym_name = "UPDATEDHY5"} : memref<512xf32> 
+>     %Buffer5 = aie.buffer(%tile_1_4) {sym_name = "Buffer5"} : memref<1536xf32> 
+>     %UPDATEDHY6 = aie.buffer(%tile_1_3) {sym_name = "UPDATEDHY6"} : memref<512xf32> 
+>     %Buffer6 = aie.buffer(%tile_1_3) {sym_name = "Buffer6"} : memref<1536xf32> 
+>     %UPDATEDHY7 = aie.buffer(%tile_1_2) {sym_name = "UPDATEDHY7"} : memref<512xf32> 
+>     %Buffer7 = aie.buffer(%tile_1_2) {sym_name = "Buffer7"} : memref<1536xf32> 
+>     %UPDATEDHY8 = aie.buffer(%tile_2_2) {sym_name = "UPDATEDHY8"} : memref<512xf32> 
+>     %Buffer8 = aie.buffer(%tile_2_2) {sym_name = "Buffer8"} : memref<1536xf32> 
+>     %UPDATEDHY9 = aie.buffer(%tile_2_3) {sym_name = "UPDATEDHY9"} : memref<512xf32> 
+>     %Buffer9 = aie.buffer(%tile_2_3) {sym_name = "Buffer9"} : memref<1536xf32> 
+>     %UPDATEDHY10 = aie.buffer(%tile_2_4) {sym_name = "UPDATEDHY10"} : memref<512xf32> 
+>     %Buffer10 = aie.buffer(%tile_2_4) {sym_name = "Buffer10"} : memref<1536xf32> 
+>     %UPDATEDHY11 = aie.buffer(%tile_2_5) {sym_name = "UPDATEDHY11"} : memref<512xf32> 
+>     %Buffer11 = aie.buffer(%tile_2_5) {sym_name = "Buffer11"} : memref<1536xf32> 
+>     %UPDATEDHY12 = aie.buffer(%tile_3_5) {sym_name = "UPDATEDHY12"} : memref<512xf32> 
+>     %Buffer12 = aie.buffer(%tile_3_5) {sym_name = "Buffer12"} : memref<1536xf32> 
+>     %UPDATEDHY13 = aie.buffer(%tile_3_4) {sym_name = "UPDATEDHY13"} : memref<512xf32> 
+>     %Buffer13 = aie.buffer(%tile_3_4) {sym_name = "Buffer13"} : memref<1536xf32> 
+>     %UPDATEDHY14 = aie.buffer(%tile_3_3) {sym_name = "UPDATEDHY14"} : memref<512xf32> 
+>     %Buffer14 = aie.buffer(%tile_3_3) {sym_name = "Buffer14"} : memref<1536xf32> 
+>     %UPDATEDHY15 = aie.buffer(%tile_3_2) {sym_name = "UPDATEDHY15"} : memref<512xf32> 
+>     %Buffer15 = aie.buffer(%tile_3_2) {sym_name = "Buffer15"} : memref<1536xf32> 
+107c105
+<         func.call @passThrough(%1, %UPDATEDHY_00, %Buffer_00) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+---
+>         func.call @passThrough(%1, %UPDATEDHY0, %Buffer0) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+115,122c113,121
+<           %10 = aie.objectfifo.acquire @meta_In(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %12 = aie.objectfifo.acquire @act_In_0_2_3(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+<           %13 = aie.objectfifo.subview.access %12[0] : !aie.objectfifosubview<memref<1536xf32>> -> memref<1536xf32>
+<           %14 = aie.objectfifo.acquire @meta_In_0_2_3(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %c72_i32_2 = arith.constant 72 : i32
+<           %c512_i32_3 = arith.constant 512 : i32
+---
+>           %10 = aie.objectfifo.acquire @meta_In(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %12 = aie.objectfifo.acquire @act_02_03(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+>           %13 = aie.objectfifo.subview.access %12[0] : !aie.objectfifosubview<memref<1536xf32>> -> memref<1536xf32>
+>           %14 = aie.objectfifo.acquire @meta_02_03(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %cst_2 = arith.constant 4.823000e-01 : f32
+>           %16 = arith.index_cast %arg1 : index to i32
+>           %c72_i32_3 = arith.constant 72 : i32
+124c123
+<           func.call @fdtd_2d(%Buffer_00, %9, %UPDATEDHY_00, %11, %13, %15, %c72_i32_2, %c512_i32_3, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+---
+>           func.call @fdtd_2d(%Buffer0, %9, %UPDATEDHY0, %11, %13, %15, %cst_2, %c72_i32_3, %16, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+127,128c126,127
+<           aie.objectfifo.release @act_In_0_2_3(Produce, 1)
+<           aie.objectfifo.release @meta_In_0_2_3(Produce, 1)
+---
+>           aie.objectfifo.release @act_02_03(Produce, 1)
+>           aie.objectfifo.release @meta_02_03(Produce, 1)
+130,132c129,131
+<         %2 = aie.objectfifo.acquire @meta_In(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<         %4 = aie.objectfifo.acquire @act_In_0_2_3(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %2 = aie.objectfifo.acquire @meta_In(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %4 = aie.objectfifo.acquire @act_02_03(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+134,135c133,135
+<         %6 = aie.objectfifo.acquire @meta_In_0_2_3(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+---
+>         %6 = aie.objectfifo.acquire @meta_02_03(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %cst = arith.constant 4.823000e-01 : f32
+139c139
+<         func.call @fdtd_2d(%Buffer_00, %Buffer_00, %UPDATEDHY_00, %3, %5, %7, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+---
+>         func.call @fdtd_2d(%Buffer0, %Buffer0, %UPDATEDHY0, %3, %5, %7, %cst, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+141,142c141,142
+<         aie.objectfifo.release @act_In_0_2_3(Produce, 1)
+<         aie.objectfifo.release @meta_In_0_2_3(Produce, 1)
+---
+>         aie.objectfifo.release @act_02_03(Produce, 1)
+>         aie.objectfifo.release @meta_02_03(Produce, 1)
+151c151
+<         %0 = aie.objectfifo.acquire @act_In_0_2_3(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %0 = aie.objectfifo.acquire @act_02_03(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+153,154c153,154
+<         func.call @passThrough(%1, %UPDATEDHY_01, %Buffer_01) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+<         aie.objectfifo.release @act_In_0_2_3(Consume, 1)
+---
+>         func.call @passThrough(%1, %UPDATEDHY1, %Buffer1) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+>         aie.objectfifo.release @act_02_03(Consume, 1)
+159c159
+<           %8 = aie.objectfifo.acquire @act_In_0_2_3(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %8 = aie.objectfifo.acquire @act_02_03(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+161,163c161,163
+<           %10 = aie.objectfifo.acquire @meta_In_0_2_3(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %12 = aie.objectfifo.acquire @act_In_0_3_4(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %10 = aie.objectfifo.acquire @meta_02_03(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %12 = aie.objectfifo.acquire @act_03_04(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+165,168c165,169
+<           %14 = aie.objectfifo.acquire @meta_In_0_3_4(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %c72_i32_2 = arith.constant 72 : i32
+<           %c512_i32_3 = arith.constant 512 : i32
+---
+>           %14 = aie.objectfifo.acquire @meta_03_04(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %cst_2 = arith.constant 4.823000e-01 : f32
+>           %16 = arith.index_cast %arg1 : index to i32
+>           %c72_i32_3 = arith.constant 72 : i32
+170,174c171,175
+<           func.call @fdtd_2d(%Buffer_01, %9, %UPDATEDHY_01, %11, %13, %15, %c72_i32_2, %c512_i32_3, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<           aie.objectfifo.release @act_In_0_2_3(Consume, 1)
+<           aie.objectfifo.release @meta_In_0_2_3(Consume, 1)
+<           aie.objectfifo.release @act_In_0_3_4(Produce, 1)
+<           aie.objectfifo.release @meta_In_0_3_4(Produce, 1)
+---
+>           func.call @fdtd_2d(%Buffer1, %9, %UPDATEDHY1, %11, %13, %15, %cst_2, %c72_i32_3, %16, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>           aie.objectfifo.release @act_02_03(Consume, 1)
+>           aie.objectfifo.release @meta_02_03(Consume, 1)
+>           aie.objectfifo.release @act_03_04(Produce, 1)
+>           aie.objectfifo.release @meta_03_04(Produce, 1)
+176,178c177,179
+<         %2 = aie.objectfifo.acquire @meta_In_0_2_3(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<         %4 = aie.objectfifo.acquire @act_In_0_3_4(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %2 = aie.objectfifo.acquire @meta_02_03(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %4 = aie.objectfifo.acquire @act_03_04(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+180,181c181,183
+<         %6 = aie.objectfifo.acquire @meta_In_0_3_4(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+---
+>         %6 = aie.objectfifo.acquire @meta_03_04(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %cst = arith.constant 4.823000e-01 : f32
+185,188c187,190
+<         func.call @fdtd_2d(%Buffer_01, %Buffer_01, %UPDATEDHY_01, %3, %5, %7, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<         aie.objectfifo.release @meta_In_0_2_3(Consume, 1)
+<         aie.objectfifo.release @act_In_0_3_4(Produce, 1)
+<         aie.objectfifo.release @meta_In_0_3_4(Produce, 1)
+---
+>         func.call @fdtd_2d(%Buffer1, %Buffer1, %UPDATEDHY1, %3, %5, %7, %cst, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>         aie.objectfifo.release @meta_02_03(Consume, 1)
+>         aie.objectfifo.release @act_03_04(Produce, 1)
+>         aie.objectfifo.release @meta_03_04(Produce, 1)
+197c199
+<         %0 = aie.objectfifo.acquire @act_In_0_3_4(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %0 = aie.objectfifo.acquire @act_03_04(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+199,200c201,202
+<         func.call @passThrough(%1, %UPDATEDHY_02, %Buffer_02) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+<         aie.objectfifo.release @act_In_0_3_4(Consume, 1)
+---
+>         func.call @passThrough(%1, %UPDATEDHY2, %Buffer2) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+>         aie.objectfifo.release @act_03_04(Consume, 1)
+205c207
+<           %8 = aie.objectfifo.acquire @act_In_0_3_4(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %8 = aie.objectfifo.acquire @act_03_04(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+207,209c209,211
+<           %10 = aie.objectfifo.acquire @meta_In_0_3_4(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %12 = aie.objectfifo.acquire @act_In_0_4_5(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %10 = aie.objectfifo.acquire @meta_03_04(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %12 = aie.objectfifo.acquire @act_04_05(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+211,214c213,217
+<           %14 = aie.objectfifo.acquire @meta_In_0_4_5(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %c72_i32_2 = arith.constant 72 : i32
+<           %c512_i32_3 = arith.constant 512 : i32
+---
+>           %14 = aie.objectfifo.acquire @meta_04_05(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %cst_2 = arith.constant 4.823000e-01 : f32
+>           %16 = arith.index_cast %arg1 : index to i32
+>           %c72_i32_3 = arith.constant 72 : i32
+216,220c219,223
+<           func.call @fdtd_2d(%Buffer_02, %9, %UPDATEDHY_02, %11, %13, %15, %c72_i32_2, %c512_i32_3, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<           aie.objectfifo.release @act_In_0_3_4(Consume, 1)
+<           aie.objectfifo.release @meta_In_0_3_4(Consume, 1)
+<           aie.objectfifo.release @act_In_0_4_5(Produce, 1)
+<           aie.objectfifo.release @meta_In_0_4_5(Produce, 1)
+---
+>           func.call @fdtd_2d(%Buffer2, %9, %UPDATEDHY2, %11, %13, %15, %cst_2, %c72_i32_3, %16, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>           aie.objectfifo.release @act_03_04(Consume, 1)
+>           aie.objectfifo.release @meta_03_04(Consume, 1)
+>           aie.objectfifo.release @act_04_05(Produce, 1)
+>           aie.objectfifo.release @meta_04_05(Produce, 1)
+222,224c225,227
+<         %2 = aie.objectfifo.acquire @meta_In_0_3_4(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<         %4 = aie.objectfifo.acquire @act_In_0_4_5(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %2 = aie.objectfifo.acquire @meta_03_04(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %4 = aie.objectfifo.acquire @act_04_05(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+226,227c229,231
+<         %6 = aie.objectfifo.acquire @meta_In_0_4_5(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+---
+>         %6 = aie.objectfifo.acquire @meta_04_05(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %cst = arith.constant 4.823000e-01 : f32
+231,234c235,238
+<         func.call @fdtd_2d(%Buffer_02, %Buffer_02, %UPDATEDHY_02, %3, %5, %7, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<         aie.objectfifo.release @meta_In_0_3_4(Consume, 1)
+<         aie.objectfifo.release @act_In_0_4_5(Produce, 1)
+<         aie.objectfifo.release @meta_In_0_4_5(Produce, 1)
+---
+>         func.call @fdtd_2d(%Buffer2, %Buffer2, %UPDATEDHY2, %3, %5, %7, %cst, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>         aie.objectfifo.release @meta_03_04(Consume, 1)
+>         aie.objectfifo.release @act_04_05(Produce, 1)
+>         aie.objectfifo.release @meta_04_05(Produce, 1)
+243c247
+<         %0 = aie.objectfifo.acquire @act_In_0_4_5(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %0 = aie.objectfifo.acquire @act_04_05(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+245,246c249,250
+<         func.call @passThrough(%1, %UPDATEDHY_03, %Buffer_03) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+<         aie.objectfifo.release @act_In_0_4_5(Consume, 1)
+---
+>         func.call @passThrough(%1, %UPDATEDHY3, %Buffer3) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+>         aie.objectfifo.release @act_04_05(Consume, 1)
+251c255
+<           %8 = aie.objectfifo.acquire @act_In_0_4_5(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %8 = aie.objectfifo.acquire @act_04_05(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+253,255c257,259
+<           %10 = aie.objectfifo.acquire @meta_In_0_4_5(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %12 = aie.objectfifo.acquire @act_In_1_0_3(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %10 = aie.objectfifo.acquire @meta_04_05(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %12 = aie.objectfifo.acquire @act_05_15(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+257,260c261,265
+<           %14 = aie.objectfifo.acquire @meta_In_1_0_3(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %c72_i32_2 = arith.constant 72 : i32
+<           %c512_i32_3 = arith.constant 512 : i32
+---
+>           %14 = aie.objectfifo.acquire @meta_05_15(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %cst_2 = arith.constant 4.823000e-01 : f32
+>           %16 = arith.index_cast %arg1 : index to i32
+>           %c72_i32_3 = arith.constant 72 : i32
+262,266c267,271
+<           func.call @fdtd_2d(%Buffer_03, %9, %UPDATEDHY_03, %11, %13, %15, %c72_i32_2, %c512_i32_3, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<           aie.objectfifo.release @act_In_0_4_5(Consume, 1)
+<           aie.objectfifo.release @meta_In_0_4_5(Consume, 1)
+<           aie.objectfifo.release @act_In_1_0_3(Produce, 1)
+<           aie.objectfifo.release @meta_In_1_0_3(Produce, 1)
+---
+>           func.call @fdtd_2d(%Buffer3, %9, %UPDATEDHY3, %11, %13, %15, %cst_2, %c72_i32_3, %16, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>           aie.objectfifo.release @act_04_05(Consume, 1)
+>           aie.objectfifo.release @meta_04_05(Consume, 1)
+>           aie.objectfifo.release @act_05_15(Produce, 1)
+>           aie.objectfifo.release @meta_05_15(Produce, 1)
+268,270c273,275
+<         %2 = aie.objectfifo.acquire @meta_In_0_4_5(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<         %4 = aie.objectfifo.acquire @act_In_1_0_3(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %2 = aie.objectfifo.acquire @meta_04_05(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %4 = aie.objectfifo.acquire @act_05_15(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+272,273c277,279
+<         %6 = aie.objectfifo.acquire @meta_In_1_0_3(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+---
+>         %6 = aie.objectfifo.acquire @meta_05_15(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %cst = arith.constant 4.823000e-01 : f32
+277,280c283,286
+<         func.call @fdtd_2d(%Buffer_03, %Buffer_03, %UPDATEDHY_03, %3, %5, %7, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<         aie.objectfifo.release @meta_In_0_4_5(Consume, 1)
+<         aie.objectfifo.release @act_In_1_0_3(Produce, 1)
+<         aie.objectfifo.release @meta_In_1_0_3(Produce, 1)
+---
+>         func.call @fdtd_2d(%Buffer3, %Buffer3, %UPDATEDHY3, %3, %5, %7, %cst, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>         aie.objectfifo.release @meta_04_05(Consume, 1)
+>         aie.objectfifo.release @act_05_15(Produce, 1)
+>         aie.objectfifo.release @meta_05_15(Produce, 1)
+289c295
+<         %0 = aie.objectfifo.acquire @act_In_1_0_3(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %0 = aie.objectfifo.acquire @act_05_15(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+291,292c297,298
+<         func.call @passThrough(%1, %UPDATEDHY_10, %Buffer_10) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+<         aie.objectfifo.release @act_In_1_0_3(Consume, 1)
+---
+>         func.call @passThrough(%1, %UPDATEDHY4, %Buffer4) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+>         aie.objectfifo.release @act_05_15(Consume, 1)
+297c303
+<           %8 = aie.objectfifo.acquire @act_In_1_0_3(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %8 = aie.objectfifo.acquire @act_05_15(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+299,301c305,307
+<           %10 = aie.objectfifo.acquire @meta_In_1_0_3(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %12 = aie.objectfifo.acquire @act_In_1_2_3(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %10 = aie.objectfifo.acquire @meta_05_15(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %12 = aie.objectfifo.acquire @act_15_14(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+303,306c309,313
+<           %14 = aie.objectfifo.acquire @meta_In_1_2_3(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %c72_i32_2 = arith.constant 72 : i32
+<           %c512_i32_3 = arith.constant 512 : i32
+---
+>           %14 = aie.objectfifo.acquire @meta_15_14(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %cst_2 = arith.constant 4.823000e-01 : f32
+>           %16 = arith.index_cast %arg1 : index to i32
+>           %c72_i32_3 = arith.constant 72 : i32
+308,312c315,319
+<           func.call @fdtd_2d(%Buffer_10, %9, %UPDATEDHY_10, %11, %13, %15, %c72_i32_2, %c512_i32_3, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<           aie.objectfifo.release @act_In_1_0_3(Consume, 1)
+<           aie.objectfifo.release @meta_In_1_0_3(Consume, 1)
+<           aie.objectfifo.release @act_In_1_2_3(Produce, 1)
+<           aie.objectfifo.release @meta_In_1_2_3(Produce, 1)
+---
+>           func.call @fdtd_2d(%Buffer4, %9, %UPDATEDHY4, %11, %13, %15, %cst_2, %c72_i32_3, %16, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>           aie.objectfifo.release @act_05_15(Consume, 1)
+>           aie.objectfifo.release @meta_05_15(Consume, 1)
+>           aie.objectfifo.release @act_15_14(Produce, 1)
+>           aie.objectfifo.release @meta_15_14(Produce, 1)
+314,316c321,323
+<         %2 = aie.objectfifo.acquire @meta_In_1_0_3(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<         %4 = aie.objectfifo.acquire @act_In_1_2_3(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %2 = aie.objectfifo.acquire @meta_05_15(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %4 = aie.objectfifo.acquire @act_15_14(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+318,319c325,327
+<         %6 = aie.objectfifo.acquire @meta_In_1_2_3(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+---
+>         %6 = aie.objectfifo.acquire @meta_15_14(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %cst = arith.constant 4.823000e-01 : f32
+323,326c331,334
+<         func.call @fdtd_2d(%Buffer_10, %Buffer_10, %UPDATEDHY_10, %3, %5, %7, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<         aie.objectfifo.release @meta_In_1_0_3(Consume, 1)
+<         aie.objectfifo.release @act_In_1_2_3(Produce, 1)
+<         aie.objectfifo.release @meta_In_1_2_3(Produce, 1)
+---
+>         func.call @fdtd_2d(%Buffer4, %Buffer4, %UPDATEDHY4, %3, %5, %7, %cst, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>         aie.objectfifo.release @meta_05_15(Consume, 1)
+>         aie.objectfifo.release @act_15_14(Produce, 1)
+>         aie.objectfifo.release @meta_15_14(Produce, 1)
+335c343
+<         %0 = aie.objectfifo.acquire @act_In_1_2_3(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %0 = aie.objectfifo.acquire @act_15_14(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+337,338c345,346
+<         func.call @passThrough(%1, %UPDATEDHY_11, %Buffer_11) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+<         aie.objectfifo.release @act_In_1_2_3(Consume, 1)
+---
+>         func.call @passThrough(%1, %UPDATEDHY5, %Buffer5) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+>         aie.objectfifo.release @act_15_14(Consume, 1)
+343c351
+<           %8 = aie.objectfifo.acquire @act_In_1_2_3(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %8 = aie.objectfifo.acquire @act_15_14(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+345,347c353,355
+<           %10 = aie.objectfifo.acquire @meta_In_1_2_3(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %12 = aie.objectfifo.acquire @act_In_1_3_4(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %10 = aie.objectfifo.acquire @meta_15_14(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %12 = aie.objectfifo.acquire @act_14_13(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+349,352c357,361
+<           %14 = aie.objectfifo.acquire @meta_In_1_3_4(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %c72_i32_2 = arith.constant 72 : i32
+<           %c512_i32_3 = arith.constant 512 : i32
+---
+>           %14 = aie.objectfifo.acquire @meta_14_13(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %cst_2 = arith.constant 4.823000e-01 : f32
+>           %16 = arith.index_cast %arg1 : index to i32
+>           %c72_i32_3 = arith.constant 72 : i32
+354,358c363,367
+<           func.call @fdtd_2d(%Buffer_11, %9, %UPDATEDHY_11, %11, %13, %15, %c72_i32_2, %c512_i32_3, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<           aie.objectfifo.release @act_In_1_2_3(Consume, 1)
+<           aie.objectfifo.release @meta_In_1_2_3(Consume, 1)
+<           aie.objectfifo.release @act_In_1_3_4(Produce, 1)
+<           aie.objectfifo.release @meta_In_1_3_4(Produce, 1)
+---
+>           func.call @fdtd_2d(%Buffer5, %9, %UPDATEDHY5, %11, %13, %15, %cst_2, %c72_i32_3, %16, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>           aie.objectfifo.release @act_15_14(Consume, 1)
+>           aie.objectfifo.release @meta_15_14(Consume, 1)
+>           aie.objectfifo.release @act_14_13(Produce, 1)
+>           aie.objectfifo.release @meta_14_13(Produce, 1)
+360,362c369,371
+<         %2 = aie.objectfifo.acquire @meta_In_1_2_3(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<         %4 = aie.objectfifo.acquire @act_In_1_3_4(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %2 = aie.objectfifo.acquire @meta_15_14(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %4 = aie.objectfifo.acquire @act_14_13(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+364,365c373,375
+<         %6 = aie.objectfifo.acquire @meta_In_1_3_4(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+---
+>         %6 = aie.objectfifo.acquire @meta_14_13(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %cst = arith.constant 4.823000e-01 : f32
+369,372c379,382
+<         func.call @fdtd_2d(%Buffer_11, %Buffer_11, %UPDATEDHY_11, %3, %5, %7, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<         aie.objectfifo.release @meta_In_1_2_3(Consume, 1)
+<         aie.objectfifo.release @act_In_1_3_4(Produce, 1)
+<         aie.objectfifo.release @meta_In_1_3_4(Produce, 1)
+---
+>         func.call @fdtd_2d(%Buffer5, %Buffer5, %UPDATEDHY5, %3, %5, %7, %cst, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>         aie.objectfifo.release @meta_15_14(Consume, 1)
+>         aie.objectfifo.release @act_14_13(Produce, 1)
+>         aie.objectfifo.release @meta_14_13(Produce, 1)
+381c391
+<         %0 = aie.objectfifo.acquire @act_In_1_3_4(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %0 = aie.objectfifo.acquire @act_14_13(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+383,384c393,394
+<         func.call @passThrough(%1, %UPDATEDHY_12, %Buffer_12) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+<         aie.objectfifo.release @act_In_1_3_4(Consume, 1)
+---
+>         func.call @passThrough(%1, %UPDATEDHY6, %Buffer6) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+>         aie.objectfifo.release @act_14_13(Consume, 1)
+389c399
+<           %8 = aie.objectfifo.acquire @act_In_1_3_4(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %8 = aie.objectfifo.acquire @act_14_13(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+391,393c401,403
+<           %10 = aie.objectfifo.acquire @meta_In_1_3_4(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %12 = aie.objectfifo.acquire @act_In_1_4_5(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %10 = aie.objectfifo.acquire @meta_14_13(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %12 = aie.objectfifo.acquire @act_13_12(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+395,398c405,409
+<           %14 = aie.objectfifo.acquire @meta_In_1_4_5(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %c72_i32_2 = arith.constant 72 : i32
+<           %c512_i32_3 = arith.constant 512 : i32
+---
+>           %14 = aie.objectfifo.acquire @meta_13_12(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %cst_2 = arith.constant 4.823000e-01 : f32
+>           %16 = arith.index_cast %arg1 : index to i32
+>           %c72_i32_3 = arith.constant 72 : i32
+400,404c411,415
+<           func.call @fdtd_2d(%Buffer_12, %9, %UPDATEDHY_12, %11, %13, %15, %c72_i32_2, %c512_i32_3, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<           aie.objectfifo.release @act_In_1_3_4(Consume, 1)
+<           aie.objectfifo.release @meta_In_1_3_4(Consume, 1)
+<           aie.objectfifo.release @act_In_1_4_5(Produce, 1)
+<           aie.objectfifo.release @meta_In_1_4_5(Produce, 1)
+---
+>           func.call @fdtd_2d(%Buffer6, %9, %UPDATEDHY6, %11, %13, %15, %cst_2, %c72_i32_3, %16, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>           aie.objectfifo.release @act_14_13(Consume, 1)
+>           aie.objectfifo.release @meta_14_13(Consume, 1)
+>           aie.objectfifo.release @act_13_12(Produce, 1)
+>           aie.objectfifo.release @meta_13_12(Produce, 1)
+406,408c417,419
+<         %2 = aie.objectfifo.acquire @meta_In_1_3_4(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<         %4 = aie.objectfifo.acquire @act_In_1_4_5(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %2 = aie.objectfifo.acquire @meta_14_13(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %4 = aie.objectfifo.acquire @act_13_12(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+410,411c421,423
+<         %6 = aie.objectfifo.acquire @meta_In_1_4_5(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+---
+>         %6 = aie.objectfifo.acquire @meta_13_12(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %cst = arith.constant 4.823000e-01 : f32
+415,418c427,430
+<         func.call @fdtd_2d(%Buffer_12, %Buffer_12, %UPDATEDHY_12, %3, %5, %7, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<         aie.objectfifo.release @meta_In_1_3_4(Consume, 1)
+<         aie.objectfifo.release @act_In_1_4_5(Produce, 1)
+<         aie.objectfifo.release @meta_In_1_4_5(Produce, 1)
+---
+>         func.call @fdtd_2d(%Buffer6, %Buffer6, %UPDATEDHY6, %3, %5, %7, %cst, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>         aie.objectfifo.release @meta_14_13(Consume, 1)
+>         aie.objectfifo.release @act_13_12(Produce, 1)
+>         aie.objectfifo.release @meta_13_12(Produce, 1)
+427c439
+<         %0 = aie.objectfifo.acquire @act_In_1_4_5(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %0 = aie.objectfifo.acquire @act_13_12(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+429,430c441,442
+<         func.call @passThrough(%1, %UPDATEDHY_13, %Buffer_13) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+<         aie.objectfifo.release @act_In_1_4_5(Consume, 1)
+---
+>         func.call @passThrough(%1, %UPDATEDHY7, %Buffer7) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+>         aie.objectfifo.release @act_13_12(Consume, 1)
+435c447
+<           %8 = aie.objectfifo.acquire @act_In_1_4_5(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %8 = aie.objectfifo.acquire @act_13_12(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+437,439c449,451
+<           %10 = aie.objectfifo.acquire @meta_In_1_4_5(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %12 = aie.objectfifo.acquire @act_In_2_0_3(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %10 = aie.objectfifo.acquire @meta_13_12(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %12 = aie.objectfifo.acquire @act_12_22(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+441,444c453,457
+<           %14 = aie.objectfifo.acquire @meta_In_2_0_3(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %c72_i32_2 = arith.constant 72 : i32
+<           %c512_i32_3 = arith.constant 512 : i32
+---
+>           %14 = aie.objectfifo.acquire @meta_12_22(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %cst_2 = arith.constant 4.823000e-01 : f32
+>           %16 = arith.index_cast %arg1 : index to i32
+>           %c72_i32_3 = arith.constant 72 : i32
+446,450c459,463
+<           func.call @fdtd_2d(%Buffer_13, %9, %UPDATEDHY_13, %11, %13, %15, %c72_i32_2, %c512_i32_3, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<           aie.objectfifo.release @act_In_1_4_5(Consume, 1)
+<           aie.objectfifo.release @meta_In_1_4_5(Consume, 1)
+<           aie.objectfifo.release @act_In_2_0_3(Produce, 1)
+<           aie.objectfifo.release @meta_In_2_0_3(Produce, 1)
+---
+>           func.call @fdtd_2d(%Buffer7, %9, %UPDATEDHY7, %11, %13, %15, %cst_2, %c72_i32_3, %16, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>           aie.objectfifo.release @act_13_12(Consume, 1)
+>           aie.objectfifo.release @meta_13_12(Consume, 1)
+>           aie.objectfifo.release @act_12_22(Produce, 1)
+>           aie.objectfifo.release @meta_12_22(Produce, 1)
+452,454c465,467
+<         %2 = aie.objectfifo.acquire @meta_In_1_4_5(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<         %4 = aie.objectfifo.acquire @act_In_2_0_3(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %2 = aie.objectfifo.acquire @meta_13_12(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %4 = aie.objectfifo.acquire @act_12_22(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+456,457c469,471
+<         %6 = aie.objectfifo.acquire @meta_In_2_0_3(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+---
+>         %6 = aie.objectfifo.acquire @meta_12_22(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %cst = arith.constant 4.823000e-01 : f32
+461,464c475,478
+<         func.call @fdtd_2d(%Buffer_13, %Buffer_13, %UPDATEDHY_13, %3, %5, %7, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<         aie.objectfifo.release @meta_In_1_4_5(Consume, 1)
+<         aie.objectfifo.release @act_In_2_0_3(Produce, 1)
+<         aie.objectfifo.release @meta_In_2_0_3(Produce, 1)
+---
+>         func.call @fdtd_2d(%Buffer7, %Buffer7, %UPDATEDHY7, %3, %5, %7, %cst, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>         aie.objectfifo.release @meta_13_12(Consume, 1)
+>         aie.objectfifo.release @act_12_22(Produce, 1)
+>         aie.objectfifo.release @meta_12_22(Produce, 1)
+473c487
+<         %0 = aie.objectfifo.acquire @act_In_2_0_3(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %0 = aie.objectfifo.acquire @act_12_22(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+475,476c489,490
+<         func.call @passThrough(%1, %UPDATEDHY_20, %Buffer_20) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+<         aie.objectfifo.release @act_In_2_0_3(Consume, 1)
+---
+>         func.call @passThrough(%1, %UPDATEDHY8, %Buffer8) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+>         aie.objectfifo.release @act_12_22(Consume, 1)
+481c495
+<           %8 = aie.objectfifo.acquire @act_In_2_0_3(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %8 = aie.objectfifo.acquire @act_12_22(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+483,485c497,499
+<           %10 = aie.objectfifo.acquire @meta_In_2_0_3(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %12 = aie.objectfifo.acquire @act_In_2_2_3(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %10 = aie.objectfifo.acquire @meta_12_22(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %12 = aie.objectfifo.acquire @act_22_23(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+487,490c501,505
+<           %14 = aie.objectfifo.acquire @meta_In_2_2_3(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %c72_i32_2 = arith.constant 72 : i32
+<           %c512_i32_3 = arith.constant 512 : i32
+---
+>           %14 = aie.objectfifo.acquire @meta_22_23(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %cst_2 = arith.constant 4.823000e-01 : f32
+>           %16 = arith.index_cast %arg1 : index to i32
+>           %c72_i32_3 = arith.constant 72 : i32
+492,496c507,511
+<           func.call @fdtd_2d(%Buffer_20, %9, %UPDATEDHY_20, %11, %13, %15, %c72_i32_2, %c512_i32_3, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<           aie.objectfifo.release @act_In_2_0_3(Consume, 1)
+<           aie.objectfifo.release @meta_In_2_0_3(Consume, 1)
+<           aie.objectfifo.release @act_In_2_2_3(Produce, 1)
+<           aie.objectfifo.release @meta_In_2_2_3(Produce, 1)
+---
+>           func.call @fdtd_2d(%Buffer8, %9, %UPDATEDHY8, %11, %13, %15, %cst_2, %c72_i32_3, %16, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>           aie.objectfifo.release @act_12_22(Consume, 1)
+>           aie.objectfifo.release @meta_12_22(Consume, 1)
+>           aie.objectfifo.release @act_22_23(Produce, 1)
+>           aie.objectfifo.release @meta_22_23(Produce, 1)
+498,500c513,515
+<         %2 = aie.objectfifo.acquire @meta_In_2_0_3(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<         %4 = aie.objectfifo.acquire @act_In_2_2_3(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %2 = aie.objectfifo.acquire @meta_12_22(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %4 = aie.objectfifo.acquire @act_22_23(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+502,503c517,519
+<         %6 = aie.objectfifo.acquire @meta_In_2_2_3(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+---
+>         %6 = aie.objectfifo.acquire @meta_22_23(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %cst = arith.constant 4.823000e-01 : f32
+507,510c523,526
+<         func.call @fdtd_2d(%Buffer_20, %Buffer_20, %UPDATEDHY_20, %3, %5, %7, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<         aie.objectfifo.release @meta_In_2_0_3(Consume, 1)
+<         aie.objectfifo.release @act_In_2_2_3(Produce, 1)
+<         aie.objectfifo.release @meta_In_2_2_3(Produce, 1)
+---
+>         func.call @fdtd_2d(%Buffer8, %Buffer8, %UPDATEDHY8, %3, %5, %7, %cst, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>         aie.objectfifo.release @meta_12_22(Consume, 1)
+>         aie.objectfifo.release @act_22_23(Produce, 1)
+>         aie.objectfifo.release @meta_22_23(Produce, 1)
+519c535
+<         %0 = aie.objectfifo.acquire @act_In_2_2_3(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %0 = aie.objectfifo.acquire @act_22_23(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+521,522c537,538
+<         func.call @passThrough(%1, %UPDATEDHY_21, %Buffer_21) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+<         aie.objectfifo.release @act_In_2_2_3(Consume, 1)
+---
+>         func.call @passThrough(%1, %UPDATEDHY9, %Buffer9) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+>         aie.objectfifo.release @act_22_23(Consume, 1)
+527c543
+<           %8 = aie.objectfifo.acquire @act_In_2_2_3(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %8 = aie.objectfifo.acquire @act_22_23(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+529,531c545,547
+<           %10 = aie.objectfifo.acquire @meta_In_2_2_3(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %12 = aie.objectfifo.acquire @act_In_2_3_4(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %10 = aie.objectfifo.acquire @meta_22_23(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %12 = aie.objectfifo.acquire @act_23_24(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+533,536c549,553
+<           %14 = aie.objectfifo.acquire @meta_In_2_3_4(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %c72_i32_2 = arith.constant 72 : i32
+<           %c512_i32_3 = arith.constant 512 : i32
+---
+>           %14 = aie.objectfifo.acquire @meta_23_24(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %cst_2 = arith.constant 4.823000e-01 : f32
+>           %16 = arith.index_cast %arg1 : index to i32
+>           %c72_i32_3 = arith.constant 72 : i32
+538,542c555,559
+<           func.call @fdtd_2d(%Buffer_21, %9, %UPDATEDHY_21, %11, %13, %15, %c72_i32_2, %c512_i32_3, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<           aie.objectfifo.release @act_In_2_2_3(Consume, 1)
+<           aie.objectfifo.release @meta_In_2_2_3(Consume, 1)
+<           aie.objectfifo.release @act_In_2_3_4(Produce, 1)
+<           aie.objectfifo.release @meta_In_2_3_4(Produce, 1)
+---
+>           func.call @fdtd_2d(%Buffer9, %9, %UPDATEDHY9, %11, %13, %15, %cst_2, %c72_i32_3, %16, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>           aie.objectfifo.release @act_22_23(Consume, 1)
+>           aie.objectfifo.release @meta_22_23(Consume, 1)
+>           aie.objectfifo.release @act_23_24(Produce, 1)
+>           aie.objectfifo.release @meta_23_24(Produce, 1)
+544,546c561,563
+<         %2 = aie.objectfifo.acquire @meta_In_2_2_3(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<         %4 = aie.objectfifo.acquire @act_In_2_3_4(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %2 = aie.objectfifo.acquire @meta_22_23(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %4 = aie.objectfifo.acquire @act_23_24(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+548,549c565,567
+<         %6 = aie.objectfifo.acquire @meta_In_2_3_4(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+---
+>         %6 = aie.objectfifo.acquire @meta_23_24(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %cst = arith.constant 4.823000e-01 : f32
+553,556c571,574
+<         func.call @fdtd_2d(%Buffer_21, %Buffer_21, %UPDATEDHY_21, %3, %5, %7, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<         aie.objectfifo.release @meta_In_2_2_3(Consume, 1)
+<         aie.objectfifo.release @act_In_2_3_4(Produce, 1)
+<         aie.objectfifo.release @meta_In_2_3_4(Produce, 1)
+---
+>         func.call @fdtd_2d(%Buffer9, %Buffer9, %UPDATEDHY9, %3, %5, %7, %cst, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>         aie.objectfifo.release @meta_22_23(Consume, 1)
+>         aie.objectfifo.release @act_23_24(Produce, 1)
+>         aie.objectfifo.release @meta_23_24(Produce, 1)
+565c583
+<         %0 = aie.objectfifo.acquire @act_In_2_3_4(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %0 = aie.objectfifo.acquire @act_23_24(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+567,568c585,586
+<         func.call @passThrough(%1, %UPDATEDHY_22, %Buffer_22) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+<         aie.objectfifo.release @act_In_2_3_4(Consume, 1)
+---
+>         func.call @passThrough(%1, %UPDATEDHY10, %Buffer10) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+>         aie.objectfifo.release @act_23_24(Consume, 1)
+573c591
+<           %8 = aie.objectfifo.acquire @act_In_2_3_4(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %8 = aie.objectfifo.acquire @act_23_24(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+575,577c593,595
+<           %10 = aie.objectfifo.acquire @meta_In_2_3_4(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %12 = aie.objectfifo.acquire @act_In_2_4_5(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %10 = aie.objectfifo.acquire @meta_23_24(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %12 = aie.objectfifo.acquire @act_24_25(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+579,582c597,601
+<           %14 = aie.objectfifo.acquire @meta_In_2_4_5(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %c72_i32_2 = arith.constant 72 : i32
+<           %c512_i32_3 = arith.constant 512 : i32
+---
+>           %14 = aie.objectfifo.acquire @meta_24_25(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %cst_2 = arith.constant 4.823000e-01 : f32
+>           %16 = arith.index_cast %arg1 : index to i32
+>           %c72_i32_3 = arith.constant 72 : i32
+584,588c603,607
+<           func.call @fdtd_2d(%Buffer_22, %9, %UPDATEDHY_22, %11, %13, %15, %c72_i32_2, %c512_i32_3, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<           aie.objectfifo.release @act_In_2_3_4(Consume, 1)
+<           aie.objectfifo.release @meta_In_2_3_4(Consume, 1)
+<           aie.objectfifo.release @act_In_2_4_5(Produce, 1)
+<           aie.objectfifo.release @meta_In_2_4_5(Produce, 1)
+---
+>           func.call @fdtd_2d(%Buffer10, %9, %UPDATEDHY10, %11, %13, %15, %cst_2, %c72_i32_3, %16, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>           aie.objectfifo.release @act_23_24(Consume, 1)
+>           aie.objectfifo.release @meta_23_24(Consume, 1)
+>           aie.objectfifo.release @act_24_25(Produce, 1)
+>           aie.objectfifo.release @meta_24_25(Produce, 1)
+590,592c609,611
+<         %2 = aie.objectfifo.acquire @meta_In_2_3_4(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<         %4 = aie.objectfifo.acquire @act_In_2_4_5(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %2 = aie.objectfifo.acquire @meta_23_24(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %4 = aie.objectfifo.acquire @act_24_25(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+594,595c613,615
+<         %6 = aie.objectfifo.acquire @meta_In_2_4_5(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+---
+>         %6 = aie.objectfifo.acquire @meta_24_25(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %cst = arith.constant 4.823000e-01 : f32
+599,602c619,622
+<         func.call @fdtd_2d(%Buffer_22, %Buffer_22, %UPDATEDHY_22, %3, %5, %7, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<         aie.objectfifo.release @meta_In_2_3_4(Consume, 1)
+<         aie.objectfifo.release @act_In_2_4_5(Produce, 1)
+<         aie.objectfifo.release @meta_In_2_4_5(Produce, 1)
+---
+>         func.call @fdtd_2d(%Buffer10, %Buffer10, %UPDATEDHY10, %3, %5, %7, %cst, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>         aie.objectfifo.release @meta_23_24(Consume, 1)
+>         aie.objectfifo.release @act_24_25(Produce, 1)
+>         aie.objectfifo.release @meta_24_25(Produce, 1)
+611c631
+<         %0 = aie.objectfifo.acquire @act_In_2_4_5(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %0 = aie.objectfifo.acquire @act_24_25(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+613,614c633,634
+<         func.call @passThrough(%1, %UPDATEDHY_23, %Buffer_23) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+<         aie.objectfifo.release @act_In_2_4_5(Consume, 1)
+---
+>         func.call @passThrough(%1, %UPDATEDHY11, %Buffer11) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+>         aie.objectfifo.release @act_24_25(Consume, 1)
+619c639
+<           %8 = aie.objectfifo.acquire @act_In_2_4_5(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %8 = aie.objectfifo.acquire @act_24_25(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+621,623c641,643
+<           %10 = aie.objectfifo.acquire @meta_In_2_4_5(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %12 = aie.objectfifo.acquire @act_In_3_0_3(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %10 = aie.objectfifo.acquire @meta_24_25(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %12 = aie.objectfifo.acquire @act_25_35(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+625,628c645,649
+<           %14 = aie.objectfifo.acquire @meta_In_3_0_3(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %c72_i32_2 = arith.constant 72 : i32
+<           %c512_i32_3 = arith.constant 512 : i32
+---
+>           %14 = aie.objectfifo.acquire @meta_25_35(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %cst_2 = arith.constant 4.823000e-01 : f32
+>           %16 = arith.index_cast %arg1 : index to i32
+>           %c72_i32_3 = arith.constant 72 : i32
+630,634c651,655
+<           func.call @fdtd_2d(%Buffer_23, %9, %UPDATEDHY_23, %11, %13, %15, %c72_i32_2, %c512_i32_3, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<           aie.objectfifo.release @act_In_2_4_5(Consume, 1)
+<           aie.objectfifo.release @meta_In_2_4_5(Consume, 1)
+<           aie.objectfifo.release @act_In_3_0_3(Produce, 1)
+<           aie.objectfifo.release @meta_In_3_0_3(Produce, 1)
+---
+>           func.call @fdtd_2d(%Buffer11, %9, %UPDATEDHY11, %11, %13, %15, %cst_2, %c72_i32_3, %16, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>           aie.objectfifo.release @act_24_25(Consume, 1)
+>           aie.objectfifo.release @meta_24_25(Consume, 1)
+>           aie.objectfifo.release @act_25_35(Produce, 1)
+>           aie.objectfifo.release @meta_25_35(Produce, 1)
+636,638c657,659
+<         %2 = aie.objectfifo.acquire @meta_In_2_4_5(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<         %4 = aie.objectfifo.acquire @act_In_3_0_3(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %2 = aie.objectfifo.acquire @meta_24_25(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %4 = aie.objectfifo.acquire @act_25_35(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+640,641c661,663
+<         %6 = aie.objectfifo.acquire @meta_In_3_0_3(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+---
+>         %6 = aie.objectfifo.acquire @meta_25_35(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %cst = arith.constant 4.823000e-01 : f32
+645,648c667,670
+<         func.call @fdtd_2d(%Buffer_23, %Buffer_23, %UPDATEDHY_23, %3, %5, %7, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<         aie.objectfifo.release @meta_In_2_4_5(Consume, 1)
+<         aie.objectfifo.release @act_In_3_0_3(Produce, 1)
+<         aie.objectfifo.release @meta_In_3_0_3(Produce, 1)
+---
+>         func.call @fdtd_2d(%Buffer11, %Buffer11, %UPDATEDHY11, %3, %5, %7, %cst, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>         aie.objectfifo.release @meta_24_25(Consume, 1)
+>         aie.objectfifo.release @act_25_35(Produce, 1)
+>         aie.objectfifo.release @meta_25_35(Produce, 1)
+657c679
+<         %0 = aie.objectfifo.acquire @act_In_3_0_3(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %0 = aie.objectfifo.acquire @act_25_35(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+659,660c681,682
+<         func.call @passThrough(%1, %UPDATEDHY_30, %Buffer_30) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+<         aie.objectfifo.release @act_In_3_0_3(Consume, 1)
+---
+>         func.call @passThrough(%1, %UPDATEDHY12, %Buffer12) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+>         aie.objectfifo.release @act_25_35(Consume, 1)
+665c687
+<           %8 = aie.objectfifo.acquire @act_In_3_0_3(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %8 = aie.objectfifo.acquire @act_25_35(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+667,669c689,691
+<           %10 = aie.objectfifo.acquire @meta_In_3_0_3(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %12 = aie.objectfifo.acquire @act_In_3_2_3(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %10 = aie.objectfifo.acquire @meta_25_35(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %12 = aie.objectfifo.acquire @act_35_34(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+671,674c693,697
+<           %14 = aie.objectfifo.acquire @meta_In_3_2_3(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %c72_i32_2 = arith.constant 72 : i32
+<           %c512_i32_3 = arith.constant 512 : i32
+---
+>           %14 = aie.objectfifo.acquire @meta_35_34(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %cst_2 = arith.constant 4.823000e-01 : f32
+>           %16 = arith.index_cast %arg1 : index to i32
+>           %c72_i32_3 = arith.constant 72 : i32
+676,680c699,703
+<           func.call @fdtd_2d(%Buffer_30, %9, %UPDATEDHY_30, %11, %13, %15, %c72_i32_2, %c512_i32_3, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<           aie.objectfifo.release @act_In_3_0_3(Consume, 1)
+<           aie.objectfifo.release @meta_In_3_0_3(Consume, 1)
+<           aie.objectfifo.release @act_In_3_2_3(Produce, 1)
+<           aie.objectfifo.release @meta_In_3_2_3(Produce, 1)
+---
+>           func.call @fdtd_2d(%Buffer12, %9, %UPDATEDHY12, %11, %13, %15, %cst_2, %c72_i32_3, %16, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>           aie.objectfifo.release @act_25_35(Consume, 1)
+>           aie.objectfifo.release @meta_25_35(Consume, 1)
+>           aie.objectfifo.release @act_35_34(Produce, 1)
+>           aie.objectfifo.release @meta_35_34(Produce, 1)
+682,684c705,707
+<         %2 = aie.objectfifo.acquire @meta_In_3_0_3(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<         %4 = aie.objectfifo.acquire @act_In_3_2_3(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %2 = aie.objectfifo.acquire @meta_25_35(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %4 = aie.objectfifo.acquire @act_35_34(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+686,687c709,711
+<         %6 = aie.objectfifo.acquire @meta_In_3_2_3(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+---
+>         %6 = aie.objectfifo.acquire @meta_35_34(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %cst = arith.constant 4.823000e-01 : f32
+691,694c715,718
+<         func.call @fdtd_2d(%Buffer_30, %Buffer_30, %UPDATEDHY_30, %3, %5, %7, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<         aie.objectfifo.release @meta_In_3_0_3(Consume, 1)
+<         aie.objectfifo.release @act_In_3_2_3(Produce, 1)
+<         aie.objectfifo.release @meta_In_3_2_3(Produce, 1)
+---
+>         func.call @fdtd_2d(%Buffer12, %Buffer12, %UPDATEDHY12, %3, %5, %7, %cst, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>         aie.objectfifo.release @meta_25_35(Consume, 1)
+>         aie.objectfifo.release @act_35_34(Produce, 1)
+>         aie.objectfifo.release @meta_35_34(Produce, 1)
+703c727
+<         %0 = aie.objectfifo.acquire @act_In_3_2_3(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %0 = aie.objectfifo.acquire @act_35_34(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+705,706c729,730
+<         func.call @passThrough(%1, %UPDATEDHY_31, %Buffer_31) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+<         aie.objectfifo.release @act_In_3_2_3(Consume, 1)
+---
+>         func.call @passThrough(%1, %UPDATEDHY13, %Buffer13) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+>         aie.objectfifo.release @act_35_34(Consume, 1)
+711c735
+<           %8 = aie.objectfifo.acquire @act_In_3_2_3(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %8 = aie.objectfifo.acquire @act_35_34(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+713,715c737,739
+<           %10 = aie.objectfifo.acquire @meta_In_3_2_3(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %12 = aie.objectfifo.acquire @act_In_3_3_4(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %10 = aie.objectfifo.acquire @meta_35_34(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %12 = aie.objectfifo.acquire @act_34_33(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+717,720c741,745
+<           %14 = aie.objectfifo.acquire @meta_In_3_3_4(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %c72_i32_2 = arith.constant 72 : i32
+<           %c512_i32_3 = arith.constant 512 : i32
+---
+>           %14 = aie.objectfifo.acquire @meta_34_33(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %cst_2 = arith.constant 4.823000e-01 : f32
+>           %16 = arith.index_cast %arg1 : index to i32
+>           %c72_i32_3 = arith.constant 72 : i32
+722,726c747,751
+<           func.call @fdtd_2d(%Buffer_31, %9, %UPDATEDHY_31, %11, %13, %15, %c72_i32_2, %c512_i32_3, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<           aie.objectfifo.release @act_In_3_2_3(Consume, 1)
+<           aie.objectfifo.release @meta_In_3_2_3(Consume, 1)
+<           aie.objectfifo.release @act_In_3_3_4(Produce, 1)
+<           aie.objectfifo.release @meta_In_3_3_4(Produce, 1)
+---
+>           func.call @fdtd_2d(%Buffer13, %9, %UPDATEDHY13, %11, %13, %15, %cst_2, %c72_i32_3, %16, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>           aie.objectfifo.release @act_35_34(Consume, 1)
+>           aie.objectfifo.release @meta_35_34(Consume, 1)
+>           aie.objectfifo.release @act_34_33(Produce, 1)
+>           aie.objectfifo.release @meta_34_33(Produce, 1)
+728,730c753,755
+<         %2 = aie.objectfifo.acquire @meta_In_3_2_3(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<         %4 = aie.objectfifo.acquire @act_In_3_3_4(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %2 = aie.objectfifo.acquire @meta_35_34(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %4 = aie.objectfifo.acquire @act_34_33(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+732,733c757,759
+<         %6 = aie.objectfifo.acquire @meta_In_3_3_4(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+---
+>         %6 = aie.objectfifo.acquire @meta_34_33(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %cst = arith.constant 4.823000e-01 : f32
+737,740c763,766
+<         func.call @fdtd_2d(%Buffer_31, %Buffer_31, %UPDATEDHY_31, %3, %5, %7, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<         aie.objectfifo.release @meta_In_3_2_3(Consume, 1)
+<         aie.objectfifo.release @act_In_3_3_4(Produce, 1)
+<         aie.objectfifo.release @meta_In_3_3_4(Produce, 1)
+---
+>         func.call @fdtd_2d(%Buffer13, %Buffer13, %UPDATEDHY13, %3, %5, %7, %cst, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>         aie.objectfifo.release @meta_35_34(Consume, 1)
+>         aie.objectfifo.release @act_34_33(Produce, 1)
+>         aie.objectfifo.release @meta_34_33(Produce, 1)
+749c775
+<         %0 = aie.objectfifo.acquire @act_In_3_3_4(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %0 = aie.objectfifo.acquire @act_34_33(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+751,752c777,778
+<         func.call @passThrough(%1, %UPDATEDHY_32, %Buffer_32) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+<         aie.objectfifo.release @act_In_3_3_4(Consume, 1)
+---
+>         func.call @passThrough(%1, %UPDATEDHY14, %Buffer14) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+>         aie.objectfifo.release @act_34_33(Consume, 1)
+757c783
+<           %8 = aie.objectfifo.acquire @act_In_3_3_4(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %8 = aie.objectfifo.acquire @act_34_33(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+759,761c785,787
+<           %10 = aie.objectfifo.acquire @meta_In_3_3_4(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %12 = aie.objectfifo.acquire @act_In_3_4_5(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %10 = aie.objectfifo.acquire @meta_34_33(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %12 = aie.objectfifo.acquire @act_33_32(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+763,766c789,793
+<           %14 = aie.objectfifo.acquire @meta_In_3_4_5(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %c72_i32_2 = arith.constant 72 : i32
+<           %c512_i32_3 = arith.constant 512 : i32
+---
+>           %14 = aie.objectfifo.acquire @meta_33_32(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %cst_2 = arith.constant 4.823000e-01 : f32
+>           %16 = arith.index_cast %arg1 : index to i32
+>           %c72_i32_3 = arith.constant 72 : i32
+768,772c795,799
+<           func.call @fdtd_2d(%Buffer_32, %9, %UPDATEDHY_32, %11, %13, %15, %c72_i32_2, %c512_i32_3, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<           aie.objectfifo.release @act_In_3_3_4(Consume, 1)
+<           aie.objectfifo.release @meta_In_3_3_4(Consume, 1)
+<           aie.objectfifo.release @act_In_3_4_5(Produce, 1)
+<           aie.objectfifo.release @meta_In_3_4_5(Produce, 1)
+---
+>           func.call @fdtd_2d(%Buffer14, %9, %UPDATEDHY14, %11, %13, %15, %cst_2, %c72_i32_3, %16, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>           aie.objectfifo.release @act_34_33(Consume, 1)
+>           aie.objectfifo.release @meta_34_33(Consume, 1)
+>           aie.objectfifo.release @act_33_32(Produce, 1)
+>           aie.objectfifo.release @meta_33_32(Produce, 1)
+774,776c801,803
+<         %2 = aie.objectfifo.acquire @meta_In_3_3_4(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<         %4 = aie.objectfifo.acquire @act_In_3_4_5(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %2 = aie.objectfifo.acquire @meta_34_33(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %4 = aie.objectfifo.acquire @act_33_32(Produce, 1) : !aie.objectfifosubview<memref<1536xf32>>
+778,779c805,807
+<         %6 = aie.objectfifo.acquire @meta_In_3_4_5(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+---
+>         %6 = aie.objectfifo.acquire @meta_33_32(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %cst = arith.constant 4.823000e-01 : f32
+783,786c811,814
+<         func.call @fdtd_2d(%Buffer_32, %Buffer_32, %UPDATEDHY_32, %3, %5, %7, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<         aie.objectfifo.release @meta_In_3_3_4(Consume, 1)
+<         aie.objectfifo.release @act_In_3_4_5(Produce, 1)
+<         aie.objectfifo.release @meta_In_3_4_5(Produce, 1)
+---
+>         func.call @fdtd_2d(%Buffer14, %Buffer14, %UPDATEDHY14, %3, %5, %7, %cst, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>         aie.objectfifo.release @meta_34_33(Consume, 1)
+>         aie.objectfifo.release @act_33_32(Produce, 1)
+>         aie.objectfifo.release @meta_33_32(Produce, 1)
+795c823
+<         %0 = aie.objectfifo.acquire @act_In_3_4_5(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>         %0 = aie.objectfifo.acquire @act_33_32(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+797,798c825,826
+<         func.call @passThrough(%1, %UPDATEDHY_33, %Buffer_33) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+<         aie.objectfifo.release @act_In_3_4_5(Consume, 1)
+---
+>         func.call @passThrough(%1, %UPDATEDHY15, %Buffer15) : (memref<1536xf32>, memref<512xf32>, memref<1536xf32>) -> ()
+>         aie.objectfifo.release @act_33_32(Consume, 1)
+803c831
+<           %8 = aie.objectfifo.acquire @act_In_3_4_5(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+---
+>           %8 = aie.objectfifo.acquire @act_33_32(Consume, 1) : !aie.objectfifosubview<memref<1536xf32>>
+805,806c833,834
+<           %10 = aie.objectfifo.acquire @meta_In_3_4_5(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+---
+>           %10 = aie.objectfifo.acquire @meta_33_32(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %11 = aie.objectfifo.subview.access %10[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+809,816c837,845
+<           %14 = aie.objectfifo.acquire @meta_out(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+<           %c72_i32_2 = arith.constant 72 : i32
+<           %c512_i32_3 = arith.constant 512 : i32
+<           %c512_i32_4 = arith.constant 512 : i32
+<           func.call @fdtd_2d(%Buffer_33, %9, %UPDATEDHY_33, %11, %13, %15, %c72_i32_2, %c512_i32_3, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<           aie.objectfifo.release @act_In_3_4_5(Consume, 1)
+<           aie.objectfifo.release @meta_In_3_4_5(Consume, 1)
+---
+>           %14 = aie.objectfifo.acquire @meta_out(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>           %15 = aie.objectfifo.subview.access %14[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>           %cst_2 = arith.constant 4.823000e-01 : f32
+>           %16 = arith.index_cast %arg1 : index to i32
+>           %c72_i32_3 = arith.constant 72 : i32
+>           %c512_i32_4 = arith.constant 512 : i32
+>           func.call @fdtd_2d(%Buffer15, %9, %UPDATEDHY15, %11, %13, %15, %cst_2, %c72_i32_3, %16, %c512_i32_4) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>           aie.objectfifo.release @act_33_32(Consume, 1)
+>           aie.objectfifo.release @meta_33_32(Consume, 1)
+820,821c849,850
+<         %2 = aie.objectfifo.acquire @meta_In_3_4_5(Consume, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+---
+>         %2 = aie.objectfifo.acquire @meta_33_32(Consume, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %3 = aie.objectfifo.subview.access %2[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+824,825c853,855
+<         %6 = aie.objectfifo.acquire @meta_out(Produce, 1) : !aie.objectfifosubview<memref<2048xui8>>
+<         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<2048xui8>> -> memref<2048xui8>
+---
+>         %6 = aie.objectfifo.acquire @meta_out(Produce, 1) : !aie.objectfifosubview<memref<1536xui8>>
+>         %7 = aie.objectfifo.subview.access %6[0] : !aie.objectfifosubview<memref<1536xui8>> -> memref<1536xui8>
+>         %cst = arith.constant 4.823000e-01 : f32
+829,830c859,860
+<         func.call @fdtd_2d(%Buffer_33, %Buffer_33, %UPDATEDHY_33, %3, %5, %7, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<2048xui8>, memref<1536xf32>, memref<2048xui8>, i32, i32, i32) -> ()
+<         aie.objectfifo.release @meta_In_3_4_5(Consume, 1)
+---
+>         func.call @fdtd_2d(%Buffer15, %Buffer15, %UPDATEDHY15, %3, %5, %7, %cst, %c72_i32, %c511_i32, %c512_i32) : (memref<1536xf32>, memref<1536xf32>, memref<512xf32>, memref<1536xui8>, memref<1536xf32>, memref<1536xui8>, f32, i32, i32, i32) -> ()
+>         aie.objectfifo.release @meta_33_32(Consume, 1)
+836,848c866
+<     aiex.runtime_sequence(%arg0: memref<786432xf32>, %arg1: memref<1048576xui32>) {
+<       aiex.npu.dma_memcpy_nd(0, 0, %arg0[0, 0, 0, 0][64, 512, 3, 512][0, 1536, 512, 1]) {id = 1 : i64, metadata = @act_In} : memref<786432xf32>
+<       aiex.npu.dma_memcpy_nd(0, 0, %arg0[0, 0, 0, 0][64, 512, 3, 512][0, 1536, 512, 1]) {id = 0 : i64, metadata = @act_out} : memref<786432xf32>
+<       aiex.npu.dma_memcpy_nd(0, 0, %arg1[0, 0, 0, 0][64, 512, 1, 512][0, 512, 512, 1]) {id = 2 : i64, metadata = @meta_mem_In} : memref<1048576xui32>
+<       aiex.npu.dma_memcpy_nd(0, 0, %arg1[0, 0, 0, 0][64, 512, 1, 512][0, 512, 512, 1]) {id = 3 : i64, metadata = @meta_mem_out} : memref<1048576xui32>
+<       aiex.npu.dma_memcpy_nd(0, 0, %arg0[0, 0, 0, 0][64, 512, 3, 512][0, 1536, 512, 1]) {id = 1 : i64, metadata = @act_In} : memref<786432xf32>
+<       aiex.npu.dma_memcpy_nd(0, 0, %arg0[0, 0, 0, 0][64, 512, 3, 512][0, 1536, 512, 1]) {id = 0 : i64, metadata = @act_out} : memref<786432xf32>
+<       aiex.npu.dma_memcpy_nd(0, 0, %arg1[0, 0, 0, 0][64, 512, 1, 512][0, 512, 512, 1]) {id = 2 : i64, metadata = @meta_mem_In} : memref<1048576xui32>
+<       aiex.npu.dma_memcpy_nd(0, 0, %arg1[0, 0, 0, 0][64, 512, 1, 512][0, 512, 512, 1]) {id = 3 : i64, metadata = @meta_mem_out} : memref<1048576xui32>
+<       aiex.npu.dma_memcpy_nd(0, 0, %arg0[0, 0, 0, 0][64, 512, 3, 512][0, 1536, 512, 1]) {id = 1 : i64, metadata = @act_In} : memref<786432xf32>
+<       aiex.npu.dma_memcpy_nd(0, 0, %arg0[0, 0, 0, 0][64, 512, 3, 512][0, 1536, 512, 1]) {id = 0 : i64, metadata = @act_out} : memref<786432xf32>
+<       aiex.npu.dma_memcpy_nd(0, 0, %arg1[0, 0, 0, 0][64, 512, 1, 512][0, 512, 512, 1]) {id = 2 : i64, metadata = @meta_mem_In} : memref<1048576xui32>
+<       aiex.npu.dma_memcpy_nd(0, 0, %arg1[0, 0, 0, 0][64, 512, 1, 512][0, 512, 512, 1]) {id = 3 : i64, metadata = @meta_mem_out} : memref<1048576xui32>
+---
+>     aiex.runtime_sequence(%arg0: memref<786432xf32>, %arg1: memref<786432xui8>) {
+851,854c869,871
+<       aiex.npu.dma_memcpy_nd(0, 0, %arg1[0, 0, 0, 0][64, 512, 1, 512][0, 512, 512, 1]) {id = 2 : i64, metadata = @meta_mem_In} : memref<1048576xui32>
+<       aiex.npu.dma_memcpy_nd(0, 0, %arg1[0, 0, 0, 0][64, 512, 1, 512][0, 512, 512, 1]) {id = 3 : i64, metadata = @meta_mem_out} : memref<1048576xui32>
+<       aiex.npu.dma_wait {symbol = @act_out}
+<       aiex.npu.dma_wait {symbol = @meta_mem_out}
+---
+>       aiex.npu.dma_memcpy_nd(0, 0, %arg1[0, 0, 0, 0][64, 512, 3, 512][0, 1536, 512, 1]) {id = 2 : i64, metadata = @meta_mem_In} : memref<786432xui8>
+>       aiex.npu.dma_memcpy_nd(0, 0, %arg1[0, 0, 0, 0][64, 512, 3, 512][0, 1536, 512, 1]) {id = 2 : i64, metadata = @meta_mem_out} : memref<786432xui8>
+>       aiex.npu.sync {channel = 0 : i32, column = 3 : i32, column_num = 1 : i32, direction = 0 : i32, row = 0 : i32, row_num = 1 : i32}
