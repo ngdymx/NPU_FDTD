@@ -132,7 +132,7 @@ def FDTD_2D():
         # Compute tile
         for col in range(NCOLS):
             for row in range(NROWS):
-                @core(compute_tiles[col][row], 'fdtd_2d.o')
+                @core(compute_tiles[col][row], f'fdtd_2d.o')
                 def core_body():
                     for _ in range_(0xFFFFFFFF):
 
